@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Football Lineup Builder</title>
+  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">⚽</text></svg>'>
+  <style>
+    :root{
+      --bg:#020617;--panel:#1f2333;--text:#f8fafc;--muted:#cbd5e1;--green:#34d399;--sky:#38bdf8;--yellow:#fcd34d;--violet:#c4b5fd;--red:#f87171;--line:rgba(255,255,255,.72)
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
+    .page{max-width:1500px;margin:0 auto;padding:28px}.header,.card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-radius:28px;box-shadow:0 20px 50px rgba(0,0,0,.28)}
+    .header{padding:24px;display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:24px}.badge{display:inline-flex;border-radius:999px;background:rgba(52,211,153,.16);color:#a7f3d0;padding:8px 14px;font-size:14px;font-weight:800;margin-bottom:10px}
+    .title{width:100%;border:0;outline:0;color:white;background:transparent;font-size:clamp(32px,4vw,52px);font-weight:1000;letter-spacing:-.04em;padding:0}.subtitle{margin:8px 0 0;color:var(--muted);font-size:16px}
+    .header-actions,.button-row,.lineup-tabs,.formation-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.btn{border-radius:18px;padding:11px 18px;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.18);transition:.15s}.btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,0,0,.25)}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}.green{background:var(--green);color:#052e16}.white{background:white;color:#0f172a}.dark{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.16)}.sky{background:var(--sky);color:#082f49}.yellow{background:var(--yellow);color:#422006}.violet{background:var(--violet);color:#2e1065}.red{background:var(--red);color:#450a0a;width:100%}.lime{background:#bef264;color:#365314}
+    .main{display:grid;grid-template-columns:minmax(0,1fr)410px;gap:24px;align-items:start}.card{padding:20px;margin-bottom:20px}.top-grid{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:14px;align-items:end}
+    label span{display:block;color:var(--muted);font-size:14px;font-weight:900;margin-bottom:7px}input,select,textarea{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:#0f172a;color:white;outline:none;padding:13px 16px}textarea{min-height:150px;resize:vertical;line-height:1.55}input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(52,211,153,.35)}
+    .lineup-tabs{border-top:1px solid rgba(255,255,255,.1);margin-top:16px;padding-top:16px}.tab{border-radius:999px;padding:10px 15px;font-size:14px;font-weight:900;background:#0f172a;color:#e2e8f0;border:1px solid rgba(255,255,255,.1)}.tab.active{background:#6ee7b7;color:#064e3b}.formation-row{border-top:1px solid rgba(255,255,255,.1);margin-top:16px;padding-top:16px}.formation-row select{width:auto;min-width:140px}.counts{color:var(--muted);font-weight:700;margin-left:auto}.saved{color:#bbf7d0;font-weight:900}
+    .pitch{position:relative;min-height:650px;aspect-ratio:5/4;overflow:hidden;border-radius:32px;background-color:#047857;box-shadow:0 25px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.14);background-image:linear-gradient(90deg,rgba(255,255,255,.08) 0 1px,transparent 1px),linear-gradient(rgba(255,255,255,.06) 0 1px,transparent 1px),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 11%,rgba(0,0,0,.05) 11% 22%);background-size:8.333% 10%,100% 10%,100% 100%}
+    .pitch-lines{pointer-events:none;position:absolute;inset:0;border:4px solid var(--line);border-radius:32px;overflow:hidden}.half{position:absolute;left:0;right:0;top:50%;height:4px;background:var(--line);transform:translateY(-50%)}.circle{position:absolute;left:50%;top:50%;width:116px;height:116px;border:4px solid var(--line);border-radius:999px;transform:translate(-50%,-50%)}.dot{position:absolute;width:8px;height:8px;background:var(--line);border-radius:999px;transform:translate(-50%,-50%)}.box{position:absolute;left:50%;transform:translateX(-50%);border-color:var(--line);border-style:solid}.big.top{top:0;width:210px;height:110px;border-width:0 4px 4px;border-radius:0 0 24px 24px}.small.top{top:0;width:105px;height:48px;border-width:0 4px 4px;border-radius:0 0 18px 18px}.big.bottom{bottom:0;width:210px;height:110px;border-width:4px 4px 0;border-radius:24px 24px 0 0}.small.bottom{bottom:0;width:105px;height:48px;border-width:4px 4px 0;border-radius:18px 18px 0 0}
+    .tile{position:absolute;z-index:10;width:132px;transform:translate(-50%,-50%);border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(2,6,23,.86);color:white;text-align:left;padding:9px;box-shadow:0 16px 30px rgba(0,0,0,.32);user-select:none;cursor:grab}.tile.selected{background:#fde68a;color:#0f172a;border-color:#fcd34d;box-shadow:0 0 0 5px rgba(252,211,77,.35),0 16px 30px rgba(0,0,0,.32)}.tile-head{display:flex;align-items:center;gap:9px}.num{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;flex-shrink:0;background:white;color:#0f172a;font-weight:1000;font-size:14px}.selected .num{background:#0f172a;color:#fde68a}.tile-name{font-weight:1000;font-size:15px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tile-kind{margin-top:4px;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#cbd5e1;font-weight:900}.selected .tile-kind{color:#475569}.subs-mini{margin-top:8px;border-radius:12px;padding:8px;background:rgba(255,255,255,.1);font-size:11px;line-height:1.35;overflow:hidden}.subs-mini div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .compact-tile{position:absolute;z-index:10;display:flex;align-items:center;gap:7px;transform:translate(-50%,-50%);border-radius:999px;padding:5px 9px;background:rgba(2,6,23,.84);color:white;box-shadow:0 12px 25px rgba(0,0,0,.3);user-select:none;cursor:grab}.compact-tile.selected{background:#fde68a;color:#0f172a;box-shadow:0 0 0 5px rgba(252,211,77,.35),0 12px 25px rgba(0,0,0,.3)}.player-dot{width:15px;height:15px;border-radius:999px;background:white;border:2px solid #020617;flex:0 0 auto}.compact-name{max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;font-weight:1000}
+    .ball-tile{position:absolute;z-index:20;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;background:transparent;color:white;user-select:none;cursor:grab}.ball-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:999px;background:white;font-size:32px;box-shadow:0 16px 30px rgba(0,0,0,.32);border:4px solid rgba(0,0,0,.2)}.ball-tile.selected .ball-icon{border-color:#fcd34d;box-shadow:0 0 0 5px rgba(252,211,77,.35),0 16px 30px rgba(0,0,0,.32)}.ball-label{margin-top:5px;border-radius:999px;background:rgba(2,6,23,.72);padding:3px 8px;font-size:12px;font-weight:900;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .side-title{margin:0;font-size:26px;line-height:1}.small-muted{color:var(--muted);font-size:14px;font-weight:800;margin:0 0 7px}.active-lineup{color:#a7f3d0;font-size:12px;font-weight:900;margin-top:8px}.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}.help h3{margin:0 0 10px;font-size:20px}.help ol{margin:0;padding-left:22px;color:var(--muted);line-height:1.55}.help li{margin:8px 0}strong{color:white}
+    @media(max-width:1100px){.main{grid-template-columns:1fr}.top-grid{grid-template-columns:1fr}.pitch{aspect-ratio:3/4}}@media(max-width:700px){.page{padding:14px}.header{align-items:stretch;flex-direction:column}.counts{margin-left:0}.tile{width:118px}.title{font-size:34px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div>
+        <div class="badge">⚽ Drag players around the pitch</div>
+        <input id="buildTitle" class="title" aria-label="Build title" />
+        <p class="subtitle">Make named lineups, compact set pieces, and export every lineup as PNG.</p>
+      </div>
+      <div class="header-actions">
+        <button id="saveBtn" class="btn green">Save</button>
+        <button id="pngBtn" class="btn lime">Save PNGs</button>
+        <button id="exportBtn" class="btn white">Export</button>
+        <button id="importBtn" class="btn dark">Import</button>
+        <input id="fileInput" type="file" accept="application/json" hidden />
+      </div>
+    </header>
+
+    <main class="main">
+      <section>
+        <div class="card">
+          <div class="top-grid">
+            <label><span>Lineup name</span><input id="lineupName" placeholder="e.g. Attacking, Defending, Subs on" /></label>
+            <button id="copyLineupBtn" class="btn violet">Copy to new lineup</button>
+            <button id="deleteLineupBtn" class="btn dark">Delete lineup</button>
+          </div>
+          <div id="lineupTabs" class="lineup-tabs"></div>
+          <div class="formation-row">
+            <label for="formationSelect" style="font-weight:900;color:var(--muted)">Formation</label>
+            <select id="formationSelect"></select>
+            <button id="addPlayerBtn" class="btn sky">+ Player</button>
+            <button id="addBallBtn" class="btn yellow">+ Ball</button>
+            <button id="compactBtn" class="btn dark">Compact: Off</button>
+            <button id="resetBtn" class="btn dark">Reset build</button>
+            <span id="counts" class="counts"></span>
+            <span id="savedMsg" class="saved"></span>
+          </div>
+        </div>
+        <div id="pitch" class="pitch"></div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <p class="small-muted">Selected tile</p>
+          <h2 id="selectedTitle" class="side-title">Nothing selected</h2>
+          <div id="selectedLineup" class="active-lineup"></div>
+          <div id="editor" style="margin-top:22px">
+            <label><span>Tile name</span><input id="tileName" placeholder="e.g. Messi, Striker, Ball 1" /></label><br>
+            <label><span>Number / short label</span><input id="tileShort" maxlength="4" placeholder="e.g. 10, GK, ⚽" /></label><br>
+            <label><span>Subs</span><textarea id="tileSubs" placeholder="Example:
+55' ON: Alex
+55' OFF: Sam
+70' ON: Jordan
+70' OFF: Riley"></textarea></label><br>
+            <div class="two-cols">
+              <label><span>X position</span><input id="tileX" type="number" min="0" max="100" /></label>
+              <label><span>Y position</span><input id="tileY" type="number" min="0" max="100" /></label>
+            </div><br>
+            <button id="deleteTileBtn" class="btn red">Delete selected tile</button>
+          </div>
+        </div>
+        <div class="card help">
+          <h3>How to use</h3>
+          <ol>
+            <li>Use <strong>Copy to new lineup</strong> for attacking, defending, and subs versions.</li>
+            <li>Use <strong>Compact</strong> on only the current lineup to make set pieces less cluttered.</li>
+            <li><strong>Save PNGs</strong> downloads every lineup as its own image.</li>
+          </ol>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+<script>
+const FORMATIONS={
+ "4-4-2":[["GK",50,91],["LB",22,76],["CB",41,78],["CB",59,78],["RB",78,76],["LM",22,55],["CM",42,57],["CM",58,57],["RM",78,55],["ST",42,30],["ST",58,30]],
+ "4-3-3":[["GK",50,91],["LB",20,76],["CB",40,78],["CB",60,78],["RB",80,76],["CM",35,58],["CDM",50,62],["CM",65,58],["LW",24,32],["ST",50,27],["RW",76,32]],
+ "4-2-3-1":[["GK",50,91],["LB",20,76],["CB",40,78],["CB",60,78],["RB",80,76],["CDM",42,62],["CDM",58,62],["LAM",27,43],["CAM",50,42],["RAM",73,43],["ST",50,25]],
+ "3-5-2":[["GK",50,91],["CB",34,78],["CB",50,80],["CB",66,78],["LWB",15,57],["CM",38,59],["CDM",50,63],["CM",62,59],["RWB",85,57],["ST",42,29],["ST",58,29]],
+ "5-3-2":[["GK",50,91],["LWB",14,73],["CB",34,78],["CB",50,80],["CB",66,78],["RWB",86,73],["CM",35,58],["CM",50,62],["CM",65,58],["ST",42,29],["ST",58,29]]
+};
+const $=id=>document.getElementById(id);
+const uid=p=>`${p}-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
+const clamp=(v,min,max)=>Math.min(max,Math.max(min,Number(v)||0));
+const safeFile=n=>String(n||"lineup").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"lineup";
+let state=createInitialState(), selectedId="", draggingId="", suppress=false;
+
+function makePlayers(f="4-3-3"){return (FORMATIONS[f]||FORMATIONS["4-3-3"]).map(([pos,x,y],i)=>({id:uid("player"),type:"player",name:pos,short:String(i+1),x,y,subs:i===8?"60' ON: Fresh winger\n60' OFF: Tired winger":""}))}
+function makeBall(name="Ball"){return{id:uid("ball"),type:"ball",name,short:"⚽",x:50,y:50,subs:""}}
+function createLineup(name="Starting XI",formation="4-3-3"){return{id:uid("lineup"),name,formation,compact:false,items:[...makePlayers(formation),makeBall()]}}
+function createInitialState(){const first=createLineup();return{title:"My Football Lineup",activeLineupId:first.id,lineups:[first]}}
+function activeLineup(){return state.lineups.find(l=>l.id===state.activeLineupId)||state.lineups[0]}
+function selectedItem(){const l=activeLineup();return l?.items.find(i=>i.id===selectedId)||l?.items[0]}
+function updateActiveLineup(updater){state.lineups=state.lineups.map(l=>l.id===state.activeLineupId?(typeof updater==="function"?updater(l):{...l,...updater}):l)}
+function normalizeImportedState(raw){
+ if(!raw)return createInitialState();
+ if(Array.isArray(raw.lineups)&&raw.lineups.length){
+  const lineups=raw.lineups.map((l,i)=>({id:l.id||uid("lineup"),name:l.name||`Lineup ${i+1}`,formation:l.formation||"4-3-3",compact:Boolean(l.compact),items:Array.isArray(l.items)&&l.items.length?l.items.map(item=>({id:item.id||uid(item.type||"item"),type:item.type||"player",name:item.name||"Unnamed",short:item.short||"?",x:Number(item.x??50),y:Number(item.y??50),subs:item.subs||""})):[...makePlayers(l.formation||"4-3-3"),makeBall()]}));
+  return{title:raw.title||"My Football Lineup",activeLineupId:lineups.some(l=>l.id===raw.activeLineupId)?raw.activeLineupId:lineups[0].id,lineups}
+ }
+ if(Array.isArray(raw.items)&&raw.items.length){const l={id:uid("lineup"),name:raw.formation?`${raw.formation} lineup`:"Starting XI",formation:raw.formation||"4-3-3",compact:false,items:raw.items};return{title:raw.title||"My Football Lineup",activeLineupId:l.id,lineups:[l]}}
+ return createInitialState()
+}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(v){return escapeHtml(v).replace(/`/g,"&#96;")}
+
+function render(){
+ renderControls(); renderPitch(); renderEditor();
+}
+function renderControls(){
+ const l=activeLineup();
+ $("buildTitle").value=state.title;
+ $("lineupName").value=l?.name||"";
+ $("formationSelect").innerHTML=Object.keys(FORMATIONS).map(name=>`<option value="${name}">${name}</option>`).join("");
+ $("formationSelect").value=l?.formation||"4-3-3";
+ $("lineupTabs").innerHTML=state.lineups.map(lineup=>`<button class="tab ${lineup.id===state.activeLineupId?"active":""}" data-lineup="${escapeAttr(lineup.id)}">${escapeHtml(lineup.name||"Unnamed lineup")}</button>`).join("");
+ document.querySelectorAll("[data-lineup]").forEach(btn=>btn.onclick=()=>switchLineup(btn.dataset.lineup));
+ $("deleteLineupBtn").disabled=state.lineups.length<=1;
+ $("compactBtn").textContent=`Compact: ${l?.compact?"On":"Off"}`;
+ $("compactBtn").className=`btn ${l?.compact?"green":"dark"}`;
+ const players=l?.items.filter(i=>i.type==="player").length||0, balls=l?.items.filter(i=>i.type==="ball").length||0;
+ $("counts").textContent=`${state.lineups.length} lineup${state.lineups.length===1?"":"s"} · ${players} players · ${balls} ball${balls===1?"":"s"}`;
+}
+function renderPitch(){
+ const l=activeLineup();
+ $("pitch").innerHTML=`<div class="pitch-lines"><div class="half"></div><div class="circle"></div><div class="dot" style="left:50%;top:50%"></div><div class="box big top"></div><div class="box small top"></div><div class="dot" style="left:50%;top:22%"></div><div class="box big bottom"></div><div class="box small bottom"></div><div class="dot" style="left:50%;top:78%"></div></div>`+(l?.items||[]).map(item=>{
+  const selected=item.id===selectedId?"selected":"", style=`left:${item.x}%;top:${item.y}%`;
+  if(item.type==="ball")return`<button class="ball-tile ${selected}" data-item="${escapeAttr(item.id)}" style="${style}"><span class="ball-icon">⚽</span><span class="ball-label">${escapeHtml(item.name||"Ball")}</span></button>`;
+  if(l.compact)return`<button class="compact-tile ${selected}" data-item="${escapeAttr(item.id)}" style="${style}"><span class="player-dot"></span><span class="compact-name">${escapeHtml(item.name||"Unnamed")}</span></button>`;
+  const subs=String(item.subs||"").split("\n").map(s=>s.trim()).filter(Boolean).slice(0,4);
+  return`<button class="tile ${selected}" data-item="${escapeAttr(item.id)}" style="${style}"><div class="tile-head"><span class="num">${escapeHtml(item.short||"?")}</span><div><div class="tile-name">${escapeHtml(item.name||"Unnamed")}</div><div class="tile-kind">Player tile</div></div></div>${subs.length?`<div class="subs-mini">${subs.map(s=>`<div>${escapeHtml(s)}</div>`).join("")}</div>`:""}</button>`;
+ }).join("");
+ document.querySelectorAll("[data-item]").forEach(btn=>btn.onpointerdown=e=>{selectedId=btn.dataset.item;draggingId=selectedId;renderPitch();renderEditor();e.preventDefault()});
+}
+function renderEditor(){
+ const item=selectedItem(), l=activeLineup();
+ $("selectedTitle").textContent=item?.name||"Nothing selected";
+ $("selectedLineup").textContent=l?.name||"";
+ if(!item){$("editor").style.display="none";return}
+ $("editor").style.display="block";suppress=true;
+ $("tileName").value=item.name||"";$("tileShort").value=item.short||"";$("tileSubs").value=item.subs||"";$("tileX").value=Math.round(item.x||0);$("tileY").value=Math.round(item.y||0);$("deleteTileBtn").disabled=(l?.items.length||0)<=1;
+ suppress=false;
+}
+function switchLineup(id){const l=state.lineups.find(x=>x.id===id);if(!l)return;state.activeLineupId=id;selectedId=l.items[0]?.id||"";render()}
+function updateSelected(patch){const item=selectedItem();if(!item)return;updateActiveLineup(l=>({...l,items:l.items.map(i=>i.id===item.id?{...i,...patch}:i)}))}
+function copyToNewLineup(){const src=activeLineup();const copy={id:uid("lineup"),name:`Lineup ${state.lineups.length+1}`,formation:src.formation,compact:src.compact,items:src.items.map(i=>({...i,id:uid(i.type||"item")}))};state.lineups.push(copy);state.activeLineupId=copy.id;selectedId=copy.items[0]?.id||"";render()}
+function deleteLineup(){if(state.lineups.length<=1)return;state.lineups=state.lineups.filter(l=>l.id!==state.activeLineupId);state.activeLineupId=state.lineups[0].id;selectedId=state.lineups[0].items[0]?.id||"";render()}
+function applyFormation(name){const l=activeLineup(), fresh=makePlayers(name), old=l.items.filter(i=>i.type==="player"), other=l.items.filter(i=>i.type!=="player");const merged=fresh.map((p,i)=>({...p,name:old[i]?.name||p.name,short:old[i]?.short||p.short,subs:old[i]?.subs||p.subs}));updateActiveLineup({formation:name,items:[...merged,...other]});selectedId=merged[0]?.id||other[0]?.id||"";render()}
+function addPlayer(){const l=activeLineup(), count=l.items.filter(i=>i.type==="player").length+1, p={id:uid("player"),type:"player",name:`Player ${count}`,short:String(count),x:50,y:50,subs:"ON:\nOFF:"};updateActiveLineup({items:[...l.items,p]});selectedId=p.id;render()}
+function addBall(){const l=activeLineup(), b=makeBall(`Ball ${l.items.filter(i=>i.type==="ball").length+1}`);updateActiveLineup({items:[...l.items,b]});selectedId=b.id;render()}
+function deleteSelectedTile(){const item=selectedItem();if(!item)return;const l=activeLineup(), items=l.items.filter(i=>i.id!==item.id);updateActiveLineup({items});selectedId=items[0]?.id||"";render()}
+function saveBuild(){localStorage.setItem("football-lineup-builder-v5",JSON.stringify(state));message("Saved")}
+function resetBuild(){state=createInitialState();selectedId=activeLineup().items[0]?.id||"";render()}
+function message(text){$("savedMsg").textContent=text;setTimeout(()=>$("savedMsg").textContent="",1800)}
+function exportBuild(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:"application/json"}));a.download=`${safeFile(state.title)}.json`;a.click();URL.revokeObjectURL(a.href)}
+function importBuild(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{state=normalizeImportedState(JSON.parse(String(reader.result)));selectedId=activeLineup().items[0]?.id||"";render()}catch{alert("That file could not be imported. Please use an exported lineup JSON file.")}};reader.readAsText(file)}
+
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath()}
+function fitText(ctx,text,maxWidth){let s=String(text||"");if(ctx.measureText(s).width<=maxWidth)return s;while(s.length&&ctx.measureText(s+"…").width>maxWidth)s=s.slice(0,-1);return s+"…"}
+function drawPitch(ctx,w,h){
+ ctx.fillStyle="#047857";ctx.fillRect(0,0,w,h);
+ for(let i=0;i<9;i++){ctx.fillStyle=i%2?"rgba(255,255,255,.035)":"rgba(0,0,0,.045)";ctx.fillRect(w/9*i,0,w/9,h)}
+ ctx.strokeStyle="rgba(255,255,255,.75)";ctx.lineWidth=7;ctx.strokeRect(8,8,w-16,h-16);ctx.beginPath();ctx.moveTo(8,h/2);ctx.lineTo(w-8,h/2);ctx.stroke();ctx.beginPath();ctx.arc(w/2,h/2,90,0,Math.PI*2);ctx.stroke();ctx.fillStyle="rgba(255,255,255,.85)";ctx.beginPath();ctx.arc(w/2,h/2,6,0,Math.PI*2);ctx.fill();
+ const boxW=330,boxH=150,smallW=170,smallH=70;ctx.strokeRect((w-boxW)/2,8,boxW,boxH);ctx.strokeRect((w-smallW)/2,8,smallW,smallH);ctx.strokeRect((w-boxW)/2,h-boxH-8,boxW,boxH);ctx.strokeRect((w-smallW)/2,h-smallH-8,smallW,smallH);ctx.beginPath();ctx.arc(w/2,h*.22,6,0,Math.PI*2);ctx.arc(w/2,h*.78,6,0,Math.PI*2);ctx.fill()
+}
+function drawLineupPng(lineup,title){
+ const canvas=document.createElement("canvas"),w=1600,h=1200;canvas.width=w;canvas.height=h;const ctx=canvas.getContext("2d");drawPitch(ctx,w,h);
+ ctx.fillStyle="rgba(2,6,23,.75)";roundRect(ctx,34,28,760,82,24);ctx.fill();ctx.fillStyle="white";ctx.font="900 34px Arial";ctx.fillText(title||"Football Lineup",58,73);ctx.fillStyle="#a7f3d0";ctx.font="800 22px Arial";ctx.fillText(`${lineup.name||"Lineup"} • ${lineup.formation||""}${lineup.compact?" • compact":""}`,58,101);
+ lineup.items.forEach(item=>{
+  let x=item.x/100*w,y=item.y/100*h;
+  if(item.type==="ball"){x=clamp(x,42,w-42);y=clamp(y,42,h-42);ctx.fillStyle="white";ctx.beginPath();ctx.arc(x,y,32,0,Math.PI*2);ctx.fill();ctx.font="32px Arial";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("⚽",x,y+1);ctx.textAlign="left";ctx.textBaseline="alphabetic";return}
+  if(lineup.compact){
+   x=clamp(x,20,w-230);y=clamp(y,28,h-28);ctx.fillStyle="#f8fafc";ctx.beginPath();ctx.arc(x,y,14,0,Math.PI*2);ctx.fill();ctx.strokeStyle="#020617";ctx.lineWidth=4;ctx.stroke();ctx.font="900 24px Arial";const text=fitText(ctx,item.name||"Unnamed",190),tw=ctx.measureText(text).width+28;ctx.fillStyle="rgba(2,6,23,.82)";roundRect(ctx,x+20,y-24,tw,48,18);ctx.fill();ctx.fillStyle="white";ctx.fillText(text,x+34,y+8);return
+  }
+  const cw=220,ch=item.subs?124:82; x=clamp(x,cw/2+10,w-cw/2-10); y=clamp(y,ch/2+10,h-ch/2-10);
+  ctx.fillStyle="rgba(2,6,23,.88)";roundRect(ctx,x-cw/2,y-ch/2,cw,ch,22);ctx.fill();
+  ctx.fillStyle="white";ctx.beginPath();ctx.arc(x-cw/2+38,y-ch/2+38,25,0,Math.PI*2);ctx.fill();ctx.fillStyle="#0f172a";ctx.font="900 19px Arial";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(item.short||"?",x-cw/2+38,y-ch/2+38);
+  ctx.textAlign="left";ctx.textBaseline="alphabetic";ctx.fillStyle="white";ctx.font="900 25px Arial";ctx.fillText(fitText(ctx,item.name||"Unnamed",cw-86),x-cw/2+76,y-ch/2+38);
+  ctx.fillStyle="#cbd5e1";ctx.font="800 15px Arial";ctx.fillText("PLAYER TILE",x-cw/2+76,y-ch/2+62);
+  if(item.subs){
+   const sx=x-cw/2+14,sy=y-ch/2+76,sw=cw-28;ctx.fillStyle="rgba(255,255,255,.1)";roundRect(ctx,sx,sy,sw,38,12);ctx.fill();ctx.fillStyle="#e2e8f0";ctx.font="700 15px Arial";
+   String(item.subs).split("\n").map(s=>s.trim()).filter(Boolean).slice(0,2).forEach((line,i)=>ctx.fillText(fitText(ctx,line,sw-18),sx+9,sy+16+i*17));
+  }
+ });
+ return canvas
+}
+async function savePNGs(){
+ for(let i=0;i<state.lineups.length;i++){const lineup=state.lineups[i],canvas=drawLineupPng(lineup,state.title),a=document.createElement("a");a.href=canvas.toDataURL("image/png");a.download=`${String(i+1).padStart(2,"0")}-${safeFile(lineup.name)}.png`;document.body.appendChild(a);a.click();a.remove();await new Promise(r=>setTimeout(r,350))}
+ message(state.lineups.length===1?"PNG saved":"PNGs saved")
+}
+
+$("buildTitle").oninput=e=>state.title=e.target.value;
+$("lineupName").oninput=e=>{updateActiveLineup({name:e.target.value});renderControls();$("lineupName").focus();$("lineupName").setSelectionRange(e.target.value.length,e.target.value.length)};
+$("copyLineupBtn").onclick=copyToNewLineup;$("deleteLineupBtn").onclick=deleteLineup;$("formationSelect").onchange=e=>applyFormation(e.target.value);$("addPlayerBtn").onclick=addPlayer;$("addBallBtn").onclick=addBall;$("compactBtn").onclick=()=>{updateActiveLineup({compact:!activeLineup().compact});render()};$("resetBtn").onclick=resetBuild;$("saveBtn").onclick=saveBuild;$("pngBtn").onclick=savePNGs;$("exportBtn").onclick=exportBuild;$("importBtn").onclick=()=>$("fileInput").click();$("fileInput").onchange=e=>{importBuild(e.target.files?.[0]);e.target.value=""};
+$("tileName").oninput=e=>{if(suppress)return;updateSelected({name:e.target.value});renderPitch();$("selectedTitle").textContent=e.target.value||"Unnamed"};$("tileShort").oninput=e=>{if(suppress)return;updateSelected({short:e.target.value.slice(0,4)});renderPitch()};$("tileSubs").oninput=e=>{if(suppress)return;updateSelected({subs:e.target.value});renderPitch()};$("tileX").oninput=e=>{if(suppress)return;updateSelected({x:clamp(e.target.value,0,100)});renderPitch()};$("tileY").oninput=e=>{if(suppress)return;updateSelected({y:clamp(e.target.value,0,100)});renderPitch()};$("deleteTileBtn").onclick=deleteSelectedTile;
+window.onpointermove=e=>{if(!draggingId)return;const r=$("pitch").getBoundingClientRect(),x=clamp((e.clientX-r.left)/r.width*100,4,96),y=clamp((e.clientY-r.top)/r.height*100,4,96);updateActiveLineup(l=>({...l,items:l.items.map(i=>i.id===draggingId?{...i,x,y}:i)}));renderPitch();renderEditor()};window.onpointerup=()=>draggingId="";
+try{const saved=localStorage.getItem("football-lineup-builder-v5")||localStorage.getItem("football-lineup-builder-v4")||localStorage.getItem("football-lineup-builder-v2")||localStorage.getItem("football-lineup-builder-v1");if(saved)state=normalizeImportedState(JSON.parse(saved))}catch{}
+selectedId=activeLineup()?.items[0]?.id||"";render();
+</script>
+</body>
+</html>
