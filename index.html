@@ -18,7 +18,7 @@
     .header-actions,.button-row,.lineup-tabs,.formation-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.btn{border-radius:18px;padding:11px 18px;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.18);transition:.15s}.btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,0,0,.25)}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}.green{background:var(--green);color:#052e16}.white{background:white;color:#0f172a}.dark{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.16)}.sky{background:var(--sky);color:#082f49}.yellow{background:var(--yellow);color:#422006}.violet{background:var(--violet);color:#2e1065}.red{background:var(--red);color:#450a0a;width:100%}.lime{background:#bef264;color:#365314}
     .main{display:grid;grid-template-columns:minmax(0,1fr)410px;gap:24px;align-items:start}.card{padding:20px;margin-bottom:20px}.top-grid{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:14px;align-items:end}
     label span{display:block;color:var(--muted);font-size:14px;font-weight:900;margin-bottom:7px}input,select,textarea{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:#0f172a;color:white;outline:none;padding:13px 16px}textarea{min-height:150px;resize:vertical;line-height:1.55}input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(52,211,153,.35)}
-    .lineup-tabs{border-top:1px solid rgba(255,255,255,.1);margin-top:16px;padding-top:16px}.tab{border-radius:999px;padding:10px 15px;font-size:14px;font-weight:900;background:#0f172a;color:#e2e8f0;border:1px solid rgba(255,255,255,.1)}.tab.active{background:#6ee7b7;color:#064e3b}.formation-row{border-top:1px solid rgba(255,255,255,.1);margin-top:16px;padding-top:16px}.formation-row select{width:auto;min-width:140px}.counts{color:var(--muted);font-weight:700;margin-left:auto}.saved{color:#bbf7d0;font-weight:900}
+    .lineup-tabs{border-top:1px solid rgba(255,255,255,.1);margin-top:16px;padding-top:16px}.tab{border-radius:999px;padding:10px 15px;font-size:14px;font-weight:900;background:#0f172a;color:#e2e8f0;border:1px solid rgba(255,255,255,.1)}.tab.active{background:#6ee7b7;color:#064e3b}.formation-row{border-top:1px solid rgba(255,255,255,.1);margin-top:16px;padding-top:16px}.formation-row select{width:auto;min-width:140px}.formation-picker{position:relative;min-width:240px}.formation-picker input{width:240px}.formation-options{display:none;position:absolute;left:0;top:calc(100% + 8px);z-index:80;width:280px;max-height:260px;overflow-y:auto;background:#0f172a;border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:8px;box-shadow:0 22px 55px rgba(0,0,0,.45)}.formation-options.open{display:block}.formation-option{display:block;width:100%;border-radius:12px;background:transparent;color:#e2e8f0;text-align:left;padding:10px 12px;font-size:14px;font-weight:900}.formation-option:hover,.formation-option.active{background:#6ee7b7;color:#064e3b}.formation-empty{padding:12px;color:#94a3b8;font-size:14px;font-weight:800}.counts{color:var(--muted);font-weight:700;margin-left:auto}.saved{color:#bbf7d0;font-weight:900}
     .pitch{position:relative;min-height:650px;aspect-ratio:5/4;overflow:hidden;border-radius:32px;background-color:#047857;box-shadow:0 25px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.14);background-image:linear-gradient(90deg,rgba(255,255,255,.08) 0 1px,transparent 1px),linear-gradient(rgba(255,255,255,.06) 0 1px,transparent 1px),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 11%,rgba(0,0,0,.05) 11% 22%);background-size:8.333% 10%,100% 10%,100% 100%}
     .pitch-lines{pointer-events:none;position:absolute;inset:0;border:4px solid var(--line);border-radius:32px;overflow:hidden}.half{position:absolute;left:0;right:0;top:50%;height:4px;background:var(--line);transform:translateY(-50%)}.circle{position:absolute;left:50%;top:50%;width:116px;height:116px;border:4px solid var(--line);border-radius:999px;transform:translate(-50%,-50%)}.dot{position:absolute;width:8px;height:8px;background:var(--line);border-radius:999px;transform:translate(-50%,-50%)}.box{position:absolute;left:50%;transform:translateX(-50%);border-color:var(--line);border-style:solid}.big.top{top:0;width:210px;height:110px;border-width:0 4px 4px;border-radius:0 0 24px 24px}.small.top{top:0;width:105px;height:48px;border-width:0 4px 4px;border-radius:0 0 18px 18px}.big.bottom{bottom:0;width:210px;height:110px;border-width:4px 4px 0;border-radius:24px 24px 0 0}.small.bottom{bottom:0;width:105px;height:48px;border-width:4px 4px 0;border-radius:18px 18px 0 0}
     .tile{position:absolute;z-index:10;width:132px;transform:translate(-50%,-50%);border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(2,6,23,.86);color:white;text-align:left;padding:9px;box-shadow:0 16px 30px rgba(0,0,0,.32);user-select:none;cursor:grab}.tile.selected{background:#fde68a;color:#0f172a;border-color:#fcd34d;box-shadow:0 0 0 5px rgba(252,211,77,.35),0 16px 30px rgba(0,0,0,.32)}.tile-head{display:flex;align-items:center;gap:9px}.num{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;flex-shrink:0;background:white;color:#0f172a;font-weight:1000;font-size:14px}.selected .num{background:#0f172a;color:#fde68a}.tile-name{font-weight:1000;font-size:15px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tile-kind{margin-top:4px;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#cbd5e1;font-weight:900}.selected .tile-kind{color:#475569}.subs-mini{margin-top:8px;border-radius:12px;padding:8px;background:rgba(255,255,255,.1);font-size:11px;line-height:1.35;overflow:hidden}.subs-mini div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -56,7 +56,7 @@
           <div id="lineupTabs" class="lineup-tabs"></div>
           <div class="formation-row">
             <label for="formationSelect" style="font-weight:900;color:var(--muted)">Formation</label>
-            <select id="formationSelect"></select>
+            <div class="formation-picker"><input id="formationSearch" autocomplete="off" placeholder="Search formations..." /><div id="formationOptions" class="formation-options"></div></div>
             <button id="addPlayerBtn" class="btn sky">+ Player</button>
             <button id="addBallBtn" class="btn yellow">+ Ball</button>
             <button id="compactBtn" class="btn dark">Compact: Off</button>
@@ -97,13 +97,137 @@
   </div>
 
 <script>
-const FORMATIONS={
- "4-4-2":[["GK",50,91],["LB",22,76],["CB",41,78],["CB",59,78],["RB",78,76],["LM",22,55],["CM",42,57],["CM",58,57],["RM",78,55],["ST",42,30],["ST",58,30]],
- "4-3-3":[["GK",50,91],["LB",20,76],["CB",40,78],["CB",60,78],["RB",80,76],["CM",35,58],["CDM",50,62],["CM",65,58],["LW",24,32],["ST",50,27],["RW",76,32]],
- "4-2-3-1":[["GK",50,91],["LB",20,76],["CB",40,78],["CB",60,78],["RB",80,76],["CDM",42,62],["CDM",58,62],["LAM",27,43],["CAM",50,42],["RAM",73,43],["ST",50,25]],
- "3-5-2":[["GK",50,91],["CB",34,78],["CB",50,80],["CB",66,78],["LWB",15,57],["CM",38,59],["CDM",50,63],["CM",62,59],["RWB",85,57],["ST",42,29],["ST",58,29]],
- "5-3-2":[["GK",50,91],["LWB",14,73],["CB",34,78],["CB",50,80],["CB",66,78],["RWB",86,73],["CM",35,58],["CM",50,62],["CM",65,58],["ST",42,29],["ST",58,29]]
-};
+const FORMATION_NAMES=[
+ "5–4–1",
+ "5–3–2",
+ "5–2–2–1",
+ "4–6–0",
+ "4–5–1",
+ "4–4–2",
+ "4–4–1–1",
+ "4–3–3 (Holding)",
+ "4–3–3 (Attack)",
+ "4–3–3 (Defend)",
+ "4–3–2–1",
+ "4–3–1–2",
+ "4–2–4",
+ "4–2–2–2",
+ "4–2–1–3",
+ "4–1–3–2",
+ "4–1–2–3",
+ "4–1–2–1–2",
+ "3–6–1",
+ "3–5–2",
+ "3–4–3",
+ "3–4–1–2",
+ "3–3–3–1",
+ "3–3–1–3",
+ "3–2–4–1"
+];
+const DEFAULT_FORMATION="4–3–3 (Holding)";
+const FORMATIONS=Object.fromEntries(FORMATION_NAMES.map(name=>[name,buildFormation(name)]));
+let formationOpen=false;
+
+function formationNums(label){return String(label||"").match(/\d+/g)?.map(Number)||[]}
+function normalizeFormationName(name){
+ const raw=String(name||"").trim().replace(/-/g,"–");
+ if(FORMATION_NAMES.includes(raw))return raw;
+ const nums=formationNums(raw).join("–");
+ if(nums==="4–3–3")return DEFAULT_FORMATION;
+ const match=FORMATION_NAMES.find(label=>formationNums(label).join("–")===nums);
+ return match||DEFAULT_FORMATION;
+}
+function xPositions(n){
+ if(n<=1)return[50];
+ if(n===2)return[42,58];
+ if(n===3)return[28,50,72];
+ if(n===4)return[18,39,61,82];
+ if(n===5)return[12,31,50,69,88];
+ if(n===6)return[9,25,41,59,75,91];
+ return Array.from({length:n},(_,i)=>12+(76*(i/(n-1))));
+}
+function labelsForRow(n,rowIndex,rowCount,formationName){
+ const isDef=rowIndex===0;
+ const isForward=rowIndex===rowCount-1;
+ const lowerMid=rowIndex===1;
+ const upperMid=rowIndex===rowCount-2;
+ if(isDef){
+  if(n===5)return["LWB","LCB","CB","RCB","RWB"];
+  if(n===4)return["LB","CB","CB","RB"];
+  if(n===3)return["LCB","CB","RCB"];
+  if(n===2)return["CB","CB"];
+ }
+ if(isForward){
+  if(n===0)return[];
+  if(n===1)return["ST"];
+  if(n===2)return["ST","ST"];
+  if(n===3)return["LW","ST","RW"];
+  if(n===4)return["LW","ST","ST","RW"];
+ }
+ if(/4–3–3/.test(formationName) && n===3){
+  if(/Attack/i.test(formationName))return["CM","CAM","CM"];
+  if(/Defend/i.test(formationName))return["CDM","CM","CDM"];
+  return["CM","CDM","CM"];
+ }
+ if(n===1)return[lowerMid?"CDM":upperMid?"CAM":"CM"];
+ if(n===2)return[lowerMid?"CDM":"CM",upperMid?"CAM":"CM"];
+ if(n===3)return upperMid?["LAM","CAM","RAM"]:lowerMid&&rowCount>3?["LCM","CDM","RCM"]:["CM","CM","CM"];
+ if(n===4)return upperMid?["LW","CAM","CAM","RW"]:["LM","CM","CM","RM"];
+ if(n===5)return["LM","CM","CDM","CM","RM"];
+ if(n===6)return["LM","LCM","CM","CM","RCM","RM"];
+ return Array.from({length:n},(_,i)=>`P${i+1}`);
+}
+function buildFormation(label){
+ const name=String(label||DEFAULT_FORMATION).replace(/-/g,"–");
+
+ if(/4–3–3/.test(name)){
+  const backFour=[["LB",20,76],["CB",40,78],["CB",60,78],["RB",80,76]];
+  const frontThree=[["LW",24,30],["ST",50,25],["RW",76,30]];
+
+  if(/Attack/i.test(name)){
+   return [
+    ["GK",50,91],
+    ...backFour,
+    ["CM",35,58],["CM",65,58],["CAM",50,47],
+    ...frontThree
+   ];
+  }
+
+  if(/Defend/i.test(name)){
+   return [
+    ["GK",50,91],
+    ...backFour,
+    ["CDM",42,64],["CDM",58,64],["CM",50,54],
+    ...frontThree
+   ];
+  }
+
+  return [
+   ["GK",50,91],
+   ...backFour,
+   ["CM",35,58],["CM",65,58],["CDM",50,66],
+   ...frontThree
+  ];
+ }
+
+ let nums=formationNums(name);
+ if(!nums.length)nums=formationNums(DEFAULT_FORMATION);
+ if(nums[nums.length-1]===0)nums=nums.slice(0,-1);
+ const rowCount=nums.length;
+ let ys;
+ if(rowCount===2)ys=[76,43];
+ else if(rowCount===3)ys=[76,58,30];
+ else if(rowCount===4)ys=[76,64,48,30];
+ else if(rowCount===5)ys=[76,67,55,43,28];
+ else ys=nums.map((_,i)=>76-(46*(i/(Math.max(1,rowCount-1)))));
+ const items=[["GK",50,91]];
+ nums.forEach((n,rowIndex)=>{
+  const labels=labelsForRow(n,rowIndex,rowCount,name);
+  const xs=xPositions(n);
+  for(let i=0;i<n;i++)items.push([labels[i]||`P${i+1}`,xs[i],ys[rowIndex]]);
+ });
+ return items;
+}
 const $=id=>document.getElementById(id);
 const uid=p=>`${p}-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,Number(v)||0));
@@ -111,9 +235,9 @@ const safeFile=n=>String(n||"lineup").toLowerCase().replace(/[^a-z0-9]+/g,"-").r
 const compactLabel=n=>String(n||"?").trim().slice(0,2).toUpperCase()||"?";
 let state=createInitialState(), selectedId="", draggingId="", suppress=false;
 
-function makePlayers(f="4-3-3"){return (FORMATIONS[f]||FORMATIONS["4-3-3"]).map(([pos,x,y],i)=>({id:uid("player"),type:"player",name:pos,short:String(i+1),x,y,subs:""}))}
+function makePlayers(f=DEFAULT_FORMATION){const key=normalizeFormationName(f);return (FORMATIONS[key]||FORMATIONS[DEFAULT_FORMATION]).map(([pos,x,y],i)=>({id:uid("player"),type:"player",name:pos,short:String(i+1),x,y,subs:""}))}
 function makeBall(name="Ball"){return{id:uid("ball"),type:"ball",name,short:"⚽",x:50,y:50,subs:""}}
-function createLineup(name="Starting XI",formation="4-3-3"){return{id:uid("lineup"),name,formation,compact:false,items:[...makePlayers(formation),makeBall()]}}
+function createLineup(name="Starting XI",formation=DEFAULT_FORMATION){return{id:uid("lineup"),name,formation,compact:false,items:[...makePlayers(formation),makeBall()]}}
 function createInitialState(){const first=createLineup();return{title:"My Football Lineup",activeLineupId:first.id,lineups:[first]}}
 function activeLineup(){return state.lineups.find(l=>l.id===state.activeLineupId)||state.lineups[0]}
 function selectedItem(){const l=activeLineup();return l?.items.find(i=>i.id===selectedId)||l?.items[0]}
@@ -121,10 +245,10 @@ function updateActiveLineup(updater){state.lineups=state.lineups.map(l=>l.id===s
 function normalizeImportedState(raw){
  if(!raw)return createInitialState();
  if(Array.isArray(raw.lineups)&&raw.lineups.length){
-  const lineups=raw.lineups.map((l,i)=>({id:l.id||uid("lineup"),name:l.name||`Lineup ${i+1}`,formation:l.formation||"4-3-3",compact:Boolean(l.compact),items:Array.isArray(l.items)&&l.items.length?l.items.map(item=>({id:item.id||uid(item.type||"item"),type:item.type||"player",name:item.name||"Unnamed",short:item.short||"?",x:Number(item.x??50),y:Number(item.y??50),subs:item.subs||""})):[...makePlayers(l.formation||"4-3-3"),makeBall()]}));
+  const lineups=raw.lineups.map((l,i)=>({id:l.id||uid("lineup"),name:l.name||`Lineup ${i+1}`,formation:normalizeFormationName(l.formation),compact:Boolean(l.compact),items:Array.isArray(l.items)&&l.items.length?l.items.map(item=>({id:item.id||uid(item.type||"item"),type:item.type||"player",name:item.name||"Unnamed",short:item.short||"?",x:Number(item.x??50),y:Number(item.y??50),subs:item.subs||""})):[...makePlayers(normalizeFormationName(l.formation)),makeBall()]}));
   return{title:raw.title||"My Football Lineup",activeLineupId:lineups.some(l=>l.id===raw.activeLineupId)?raw.activeLineupId:lineups[0].id,lineups}
  }
- if(Array.isArray(raw.items)&&raw.items.length){const l={id:uid("lineup"),name:raw.formation?`${raw.formation} lineup`:"Starting XI",formation:raw.formation||"4-3-3",compact:false,items:raw.items};return{title:raw.title||"My Football Lineup",activeLineupId:l.id,lineups:[l]}}
+ if(Array.isArray(raw.items)&&raw.items.length){const l={id:uid("lineup"),name:raw.formation?`${raw.formation} lineup`:"Starting XI",formation:normalizeFormationName(raw.formation),compact:false,items:raw.items};return{title:raw.title||"My Football Lineup",activeLineupId:l.id,lineups:[l]}}
  return createInitialState()
 }
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
@@ -137,8 +261,8 @@ function renderControls(){
  const l=activeLineup();
  $("buildTitle").value=state.title;
  $("lineupName").value=l?.name||"";
- $("formationSelect").innerHTML=Object.keys(FORMATIONS).map(name=>`<option value="${name}">${name}</option>`).join("");
- $("formationSelect").value=l?.formation||"4-3-3";
+ $("formationSearch").value=l?.formation||DEFAULT_FORMATION;
+ renderFormationOptions("");
  $("lineupTabs").innerHTML=state.lineups.map(lineup=>`<button class="tab ${lineup.id===state.activeLineupId?"active":""}" data-lineup="${escapeAttr(lineup.id)}">${escapeHtml(lineup.name||"Unnamed lineup")}</button>`).join("");
  document.querySelectorAll("[data-lineup]").forEach(btn=>btn.onclick=()=>switchLineup(btn.dataset.lineup));
  $("deleteLineupBtn").disabled=state.lineups.length<=1;
@@ -147,6 +271,15 @@ function renderControls(){
  const players=l?.items.filter(i=>i.type==="player").length||0, balls=l?.items.filter(i=>i.type==="ball").length||0;
  $("counts").textContent=`${state.lineups.length} lineup${state.lineups.length===1?"":"s"} · ${players} players · ${balls} ball${balls===1?"":"s"}`;
 }
+function renderFormationOptions(query=""){
+ const q=String(query||"").toLowerCase().replace(/-/g,"–").trim();
+ const active=normalizeFormationName(activeLineup()?.formation||DEFAULT_FORMATION);
+ const matches=FORMATION_NAMES.filter(name=>name.toLowerCase().includes(q));
+ $("formationOptions").className=`formation-options ${formationOpen?"open":""}`;
+ $("formationOptions").innerHTML=matches.length?matches.map(name=>`<button type="button" class="formation-option ${name===active?"active":""}" data-formation="${escapeAttr(name)}">${escapeHtml(name)}</button>`).join(""):`<div class="formation-empty">No formations found</div>`;
+ document.querySelectorAll("[data-formation]").forEach(btn=>btn.onclick=()=>{formationOpen=false;applyFormation(btn.dataset.formation)});
+}
+
 function renderPitch(){
  const l=activeLineup();
  $("pitch").innerHTML=`<div class="pitch-lines"><div class="half"></div><div class="circle"></div><div class="dot" style="left:50%;top:50%"></div><div class="box big top"></div><div class="box small top"></div><div class="dot" style="left:50%;top:22%"></div><div class="box big bottom"></div><div class="box small bottom"></div><div class="dot" style="left:50%;top:78%"></div></div>`+(l?.items||[]).map(item=>{
@@ -171,7 +304,7 @@ function switchLineup(id){const l=state.lineups.find(x=>x.id===id);if(!l)return;
 function updateSelected(patch){const item=selectedItem();if(!item)return;updateActiveLineup(l=>({...l,items:l.items.map(i=>i.id===item.id?{...i,...patch}:i)}))}
 function copyToNewLineup(){const src=activeLineup();const copy={id:uid("lineup"),name:`Lineup ${state.lineups.length+1}`,formation:src.formation,compact:src.compact,items:src.items.map(i=>({...i,id:uid(i.type||"item")}))};state.lineups.push(copy);state.activeLineupId=copy.id;selectedId=copy.items[0]?.id||"";render()}
 function deleteLineup(){if(state.lineups.length<=1)return;state.lineups=state.lineups.filter(l=>l.id!==state.activeLineupId);state.activeLineupId=state.lineups[0].id;selectedId=state.lineups[0].items[0]?.id||"";render()}
-function applyFormation(name){const l=activeLineup(), fresh=makePlayers(name), old=l.items.filter(i=>i.type==="player"), other=l.items.filter(i=>i.type!=="player");const merged=fresh.map((p,i)=>({...p,name:old[i]?.name||p.name,short:old[i]?.short||p.short,subs:old[i]?.subs||p.subs}));updateActiveLineup({formation:name,items:[...merged,...other]});selectedId=merged[0]?.id||other[0]?.id||"";render()}
+function applyFormation(name){name=normalizeFormationName(name);const l=activeLineup(), fresh=makePlayers(name), old=l.items.filter(i=>i.type==="player"), other=l.items.filter(i=>i.type!=="player");const merged=fresh.map((p,i)=>({...p,name:old[i]?.name||p.name,short:old[i]?.short||p.short,subs:old[i]?.subs||p.subs}));updateActiveLineup({formation:name,items:[...merged,...other]});selectedId=merged[0]?.id||other[0]?.id||"";render()}
 function addPlayer(){const l=activeLineup(), count=l.items.filter(i=>i.type==="player").length+1, p={id:uid("player"),type:"player",name:`Player ${count}`,short:String(count),x:50,y:50,subs:""};updateActiveLineup({items:[...l.items,p]});selectedId=p.id;render()}
 function addBall(){const l=activeLineup(), b=makeBall(`Ball ${l.items.filter(i=>i.type==="ball").length+1}`);updateActiveLineup({items:[...l.items,b]});selectedId=b.id;render()}
 function deleteSelectedTile(){const item=selectedItem();if(!item)return;const l=activeLineup(), items=l.items.filter(i=>i.id!==item.id);updateActiveLineup({items});selectedId=items[0]?.id||"";render()}
@@ -217,7 +350,12 @@ async function savePNGs(){
 
 $("buildTitle").oninput=e=>state.title=e.target.value;
 $("lineupName").oninput=e=>{updateActiveLineup({name:e.target.value});renderControls();$("lineupName").focus();$("lineupName").setSelectionRange(e.target.value.length,e.target.value.length)};
-$("copyLineupBtn").onclick=copyToNewLineup;$("deleteLineupBtn").onclick=deleteLineup;$("formationSelect").onchange=e=>applyFormation(e.target.value);$("addPlayerBtn").onclick=addPlayer;$("addBallBtn").onclick=addBall;$("compactBtn").onclick=()=>{updateActiveLineup({compact:!activeLineup().compact});render()};$("resetBtn").onclick=resetBuild;$("saveBtn").onclick=saveBuild;$("pngBtn").onclick=savePNGs;$("exportBtn").onclick=exportBuild;$("importBtn").onclick=()=>$("fileInput").click();$("fileInput").onchange=e=>{importBuild(e.target.files?.[0]);e.target.value=""};
+$("copyLineupBtn").onclick=copyToNewLineup;$("deleteLineupBtn").onclick=deleteLineup;
+$("formationSearch").onfocus=e=>{formationOpen=true;e.target.select();renderFormationOptions("")};
+$("formationSearch").oninput=e=>{formationOpen=true;renderFormationOptions(e.target.value)};
+$("formationSearch").onkeydown=e=>{if(e.key==="Enter"){const first=$("formationOptions").querySelector("[data-formation]");if(first){formationOpen=false;applyFormation(first.dataset.formation)}}else if(e.key==="Escape"){formationOpen=false;renderFormationOptions("")}};
+document.addEventListener("click",e=>{if(!e.target.closest(".formation-picker")){formationOpen=false;renderFormationOptions("")}});
+$("addPlayerBtn").onclick=addPlayer;$("addBallBtn").onclick=addBall;$("compactBtn").onclick=()=>{updateActiveLineup({compact:!activeLineup().compact});render()};$("resetBtn").onclick=resetBuild;$("saveBtn").onclick=saveBuild;$("pngBtn").onclick=savePNGs;$("exportBtn").onclick=exportBuild;$("importBtn").onclick=()=>$("fileInput").click();$("fileInput").onchange=e=>{importBuild(e.target.files?.[0]);e.target.value=""};
 $("tileName").oninput=e=>{if(suppress)return;updateSelected({name:e.target.value});renderPitch();$("selectedTitle").textContent=e.target.value||"Unnamed"};$("tileShort").oninput=e=>{if(suppress)return;updateSelected({short:e.target.value.slice(0,4)});renderPitch()};$("tileSubs").oninput=e=>{if(suppress)return;updateSelected({subs:e.target.value});renderPitch()};$("tileX").oninput=e=>{if(suppress)return;updateSelected({x:clamp(e.target.value,0,100)});renderPitch()};$("tileY").oninput=e=>{if(suppress)return;updateSelected({y:clamp(e.target.value,0,100)});renderPitch()};$("deleteTileBtn").onclick=deleteSelectedTile;
 window.onpointermove=e=>{if(!draggingId)return;const r=$("pitch").getBoundingClientRect(),x=clamp((e.clientX-r.left)/r.width*100,4,96),y=clamp((e.clientY-r.top)/r.height*100,4,96);updateActiveLineup(l=>({...l,items:l.items.map(i=>i.id===draggingId?{...i,x,y}:i)}));renderPitch();renderEditor()};window.onpointerup=()=>draggingId="";
 try{const saved=localStorage.getItem("football-lineup-builder-v5")||localStorage.getItem("football-lineup-builder-v4")||localStorage.getItem("football-lineup-builder-v2")||localStorage.getItem("football-lineup-builder-v1");if(saved)state=normalizeImportedState(JSON.parse(saved))}catch{}
